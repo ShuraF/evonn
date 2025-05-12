@@ -28,15 +28,16 @@ PROGRAM slstm_article
     CHARACTER(len=124) :: arg
 
     if (iargc().ne.10) then
-        CC = 100.0
-        CD = 20
-        DC = 200 - CD
+        CC = 1.0
+        CD = -0.2
+        DC = CC - CD
         Wstrength = 0.01
         N = 100
-        Runs = 50000
-        mu_rate = 0.01
-        Dhid_start = 1
-        mix_flag = 1
+        Runs = 1000000
+        mu_rate = 0.8
+        Dhid_start = 5
+        mix_flag = 0
+        filenameout = "run.out"
     else
         CALL getarg(1, arg)
         read(arg, *) CC

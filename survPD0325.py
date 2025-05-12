@@ -12,7 +12,7 @@ Wstrength = 0.01
 N = 100
 Runs = 1000000
 Dhid_start = 5
-outnamesave = 'RunName'
+outnamesave = 'RunName1'
 mix = 0
 
 # for mu_rate in [0.01,0.09]: #[np.linspace(0.01,0.09,9):
@@ -30,7 +30,7 @@ for Aval in [1.0]:
             for M in range(2):
                 jobname = f"RunName_{DC}_{M}_{mu_rate}_{Aval}"
                 outname = f'RunName_{DC}_{M}_{mu_rate}_{Aval}'
-                com = f'sbatch  --job-name="{jobname}" --output="{jobname}.out" ../irun_slstm_evol.sh  ../slstm_article.out {outname} {CC} {CD} {DC} {Wstrength} \
+                com = f'sbatch  --job-name="{jobname}" --output="{jobname}.out" ../irun_slstm_evol.sh  ../build/slstm_article {outname} {CC} {CD} {DC} {Wstrength} \
                     {N}  {Runs} {mu_rate}  {Dhid_start} {outnamesave}_{DC}_{M}_{mu_rate} {mix}'
                 print('com = ', com)
                 os.popen(com)
