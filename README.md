@@ -77,15 +77,24 @@ You can now execute the program from the build directory:
 * **Compiler errors?** Check that your HDF5 and Fortran versions are compatible (e.g., both built with the same compiler).
 
 
+## Run
 
+The simulation can be executed ./build/slstm_article with defoult parameters
 
-# slstm_article
+CC = 1.0
+CD = -0.2
+DC = CC - CD
+Wstrength = 0.01
+N = 100
+Runs = 1000000
+mu_rate = 0.8
+Dhid_start = 5
+mix_flag = 0
+filenameout = "run.out"
 
-to compile:
+# using slurm batch
 
-h5fc   -O3 slstm_evol_mix_noise.f90 mod_slstm_omp_evol.f90 mod_rw_hdf5.f90  -fopenmp -o c_slstmp_evol_mix_noise.out
-
-to run:
+com =  sbatch  --job-name="RunName_1.8_1_0.8_1.0" --output="RunName_1.8_1_0.8_1.0.out" ../irun_slstm_evol.sh  ../build/slstm_article RunName 100  1000000 0.8  5 RunName1_1.8_1_0.8 0
 
 survPD0325.py
 
