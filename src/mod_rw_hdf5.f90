@@ -7,62 +7,6 @@ module mod_rw_hdf5
    public :: arrayR_hdf5, arrayI_hdf5, hdf5_array1R, hdf5_array3R, hdf5_array2R, hdf5_1I, hdf5_1R, hdf5_array1I
    contains
 
-   ! subroutine array1R_hdf5(filenameout, dsetname1, dset_data, error)
-   !    use HDF5
-   !    implicit none
-   !    CHARACTER(len=64), intent(in) :: filenameout
-   !    CHARACTER(len=64), intent(in) :: dsetname1
-
-   !    INTEGER(HID_T) :: file_id       ! File identifier
-   !    INTEGER(HID_T) :: dset_id       ! Dataset identifier
-   !    INTEGER(HID_T) :: space_id       ! Dataspace identifier
-   !    INTEGER(HID_T) :: dtype_id       ! Dataspace identifier
-
-   !    INTEGER     ::   error ! Error flag
-   !    INTEGER  :: dname_exist
-   !    logical :: file_exists
-
-   !    REAL(KIND = 8), DIMENSION(:) :: dset_data
-   !    INTEGER(HSIZE_T), DIMENSION(:), ALLOCATABLE :: data_dims
-
-   !    data_dims = shape(dset_data)   
-
-   !    ! Initialize FORTRAN interface.
-
-   !    CALL h5open_f(error)
-
-   !    ! Open an existing file.
-   !    INQUIRE(File=filenameout,EXIST=file_exists)
-   !    if(file_exists) then
-   !       CALL h5fopen_f(filenameout, H5F_ACC_RDWR_F, file_id, error)
-
-   !       CALL h5dopen_f(file_id, dsetname1, dset_id, dname_exist)
-
-   !       if(dname_exist.ne.0) then
-   !          CALL h5screate_simple_f(size(data_dims),data_dims,space_id,error)
-   !          CALL h5dcreate_f(file_id,dsetname1,H5T_NATIVE_DOUBLE,space_id,dset_id,error)
-   !       endif 
-   !    else
-   !       CALL h5fcreate_f(filenameout, H5F_ACC_TRUNC_F, file_id, error)
-   !       CALL h5screate_simple_f(size(data_dims),data_dims,space_id,error)
-   !       CALL h5dcreate_f(file_id,dsetname1,H5T_NATIVE_DOUBLE,space_id,dset_id,error)
-   !    endif
-
-   !    !Get dataspace ID
-   !    CALL h5dwrite_f(dset_id, H5T_NATIVE_DOUBLE,dset_data,data_dims,error)
-
-   !    CALL h5dclose_f(dset_id,error)
-
-   !    if (dname_exist.ne.0) then
-   !       CALL h5sclose_f(space_id,error)
-   !    endif
-
-   !    CALL h5fclose_f(file_id,error)
-
-   !    CALL h5close_f(error)
-
-   ! end subroutine array1R_hdf5
-
    subroutine arrayR_hdf5(filenameout, dsetname1, dset_data, error)
       use HDF5
       implicit none

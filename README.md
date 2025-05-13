@@ -1,4 +1,5 @@
-
+**File: /home/sasha/try/slstm_article/README.md**
+```markdown
 This project compiles a Fortran program using `gfortran`, with support for OpenMP and HDF5. It includes the following source files:
 
 * `slstm_evol_mix_noise.f90`
@@ -7,7 +8,7 @@ This project compiles a Fortran program using `gfortran`, with support for OpenM
 
 ## Requirements
 
-Make sure the following are installed on your system:
+Ensure the following are installed on your system:
 
 * [CMake](https://cmake.org/) (version ≥ 3.10)
 * `gfortran` (GNU Fortran compiler)
@@ -29,7 +30,7 @@ cd build
 
 ### 2. Configure with CMake
 
-If HDF5 is correctly installed and discoverable:
+If HDF5 is correctly installed and discoverable, run:
 
 ```bash
 cmake ..
@@ -54,7 +55,7 @@ make
 If successful, this will create an executable named:
 
 ```bash
-c_slstmp_evol_mix_noise
+slstm_article
 ```
 
 ### 4. Run the Program
@@ -62,48 +63,60 @@ c_slstmp_evol_mix_noise
 You can now execute the program from the build directory:
 
 ```bash
-./c_slstmp_evol_mix_noise
+./slstm_article
 ```
 
 ## Notes
 
 * OpenMP enables parallel computation; ensure your compiler and system support it.
 * HDF5 must be compiled with Fortran support.
-* If you modify source files, just re-run `make` to rebuild.
+* If you modify source files, simply re-run `make` to rebuild.
 
 ## Troubleshooting
 
-* **HDF5 not found?** Use `cmake -DHDF5_ROOT=...` and make sure the Fortran module files (`.mod`) and libraries are included.
-* **Compiler errors?** Check that your HDF5 and Fortran versions are compatible (e.g., both built with the same compiler).
-
+* **HDF5 not found?** Use `cmake -DHDF5_ROOT=...` and ensure the Fortran module files (`.mod`) and libraries are included.
+* **Compiler errors?** Verify that your HDF5 and Fortran versions are compatible (e.g., both built with the same compiler).
 
 ## Run
 
-The simulation can be executed ./build/slstm_article with defoult parameters
+The simulation can be executed using `./build/slstm_article` with default parameters:
 
-CC = 1.0
-CD = -0.2
-DC = CC - CD
-Wstrength = 0.01
-N = 100
-Runs = 1000000
-mu_rate = 0.8
-Dhid_start = 5
-mix_flag = 0
-filenameout = "run.out"
+- CC = 1.0
+- CD = -0.2
+- DC = CC - CD
+- Wstrength = 0.01
+- N = 100
+- Runs = 1000000
+- mu_rate = 0.8
+- Dhid_start = 5
+- mix_flag = 0
+- filenameout = "run.out"
 
-# using slurm batch
+### Using SLURM Batch
 
-com =  sbatch  --job-name="RunName_1.8_1_0.8_1.0" --output="RunName_1.8_1_0.8_1.0.out" ../irun_slstm_evol.sh  ../build/slstm_article RunName 100  1000000 0.8  5 RunName1_1.8_1_0.8 0
+To submit a job using SLURM, use the following command:
 
-survPD0325.py
+```bash
+sbatch --job-name="RunName_1.8_1_0.8_1.0" --output="RunName_1.8_1_0.8_1.0.out" ../irun_slstm_evol.sh ../build/slstm_article RunName 100 1000000 0.8 5 RunName1_1.8_1_0.8 0
+```
 
-change sbatch script accordingly:
+Modify the SLURM script according to your local partition name:
 
+```bash
 #!/bin/sh
 #
 #SBATCH --partition=MY_PARTITION
 #SBATCH --nodes=1
 #SBATCH --exclusive
 
-$1 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} ${15} ${16} ${17} ${18} ${19} ${20} ${21} ${22} ${23} ${24} ${25} ${26} ${27} ${28} > $2
+$1 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} > $2
+```
+
+To run:
+
+```bash
+sbatch --job-name="{jobname}" --output="{jobname}.out" ../irun_slstm_evol.sh ../build/slstm_article {outname} {CC} {CD} {DC} {Wstrength} {N} {Runs} {mu_rate} {Dhid_start} {outnamesave}_{DC}_{M}_{mu_rate} {mix}
+```
+
+Alternatively, use the `run_survey.py` script from the running directory.
+```
