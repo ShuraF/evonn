@@ -1,8 +1,7 @@
-!h5fc   -O3 slstm_article.f90 mod_slstm_omp_evol.f90 mod_rw_hdf5.f90  -fopenmp -o slstm_article.out
-PROGRAM slstm_article
+PROGRAM evonn
 
     USE HDF5
-    USE mod_slstm_omp_evol
+    USE mod_evonn
     USE mod_rw_hdf5
     USE OMP_LIB
 
@@ -231,4 +230,4 @@ PROGRAM slstm_article
         WRITE(*,*)  k, Clev/(Ninteract+1)/Ninteract       
     enddo
 
-END PROGRAM slstm_article
+END PROGRAM evonn

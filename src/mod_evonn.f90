@@ -1,4 +1,4 @@
-module mod_slstm_omp_evol
+module mod_evonn
     USE OMP_LIB
     implicit none
     public slstm_new_lbl, init_random_seed, Slstm_forward_0NOB, father
@@ -244,4 +244,4 @@ subroutine MutateSLSTMNOBmemdiflbl(slstm,Wstrength)
 end subroutine MutateSLSTMNOBmemdiflbl
 
 
-end module mod_slstm_omp_evol
+end module mod_evonn

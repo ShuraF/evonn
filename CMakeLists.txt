@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(slstm_evol_mix_noise Fortran)
+project(evonn Fortran)
 
 # Use gfortran as the compiler
 set(CMAKE_Fortran_COMPILER gfortran)
@@ -17,17 +17,17 @@ set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -O3 -fopenmp ")
 file(GLOB SRC_FILES "${CMAKE_SOURCE_DIR}/src/*.f90")
 
 # Define the executable from source files
-add_executable(slstm_article ${SRC_FILES})
+add_executable(evonn ${SRC_FILES})
 
 # Link OpenMP and HDF5
-target_link_libraries(slstm_article
+target_link_libraries(evonn
     PRIVATE
     OpenMP::OpenMP_Fortran
     ${HDF5_Fortran_LIBRARIES}
 )
 
 # Include HDF5 Fortran modules
-target_include_directories(slstm_article
+target_include_directories(evonn
     PRIVATE
     ${HDF5_Fortran_INCLUDE_DIRS}
 )

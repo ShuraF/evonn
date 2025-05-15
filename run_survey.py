@@ -27,7 +27,7 @@ for Aval in [1.0]:
                 outname = f'RunName_{DC}_{M}_{mu_rate}_{Aval}'
                 
                 # Construct the SLURM command to submit the job
-                com = f'sbatch  --job-name="{jobname}" --output="{jobname}.out" ../irun_slstm_evol.sh  ../build/slstm_article {outname} {CC} {CD} {DC} {Wstrength} \
+                com = f'sbatch  --job-name="{jobname}" --output="{jobname}.out" ../irun_evonn.sh  ../build/evonn {outname} {CC} {CD} {DC} {Wstrength} \
                     {N}  {Runs} {mu_rate}  {Dhid_start} {outnamesave}_{DC}_{M}_{mu_rate} {mix}'
                 
                 # Print and execute the command
