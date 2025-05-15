@@ -1,9 +1,9 @@
-**File: /home/sasha/try/slstm_article/README.md**
+**File: /home/sasha/try/evonn/README.md**
 ```markdown
 This project compiles a Fortran program using `gfortran`, with support for OpenMP and HDF5. It includes the following source files:
 
-* `slstm_evol_mix_noise.f90`
-* `mod_slstm_omp_evol.f90`
+* `evonn.f90`
+* `mod_evonn.f90`
 * `mod_rw_hdf5.f90`
 
 ## Requirements
@@ -55,7 +55,7 @@ make
 If successful, this will create an executable named:
 
 ```bash
-slstm_article
+evonn
 ```
 
 ### 4. Run the Program
@@ -63,7 +63,7 @@ slstm_article
 You can now execute the program from the build directory:
 
 ```bash
-./slstm_article
+./evonn
 ```
 
 ## Notes
@@ -79,7 +79,7 @@ You can now execute the program from the build directory:
 
 ## Run
 
-The simulation can be executed using `./build/slstm_article` with default parameters:
+The simulation can be executed using `./build/evonn` with default parameters:
 
 - CC = 1.0
 - CD = -0.2
@@ -92,12 +92,14 @@ The simulation can be executed using `./build/slstm_article` with default parame
 - mix_flag = 0
 - filenameout = "run.out"
 
+./build/evonn 1.0 -0.2 1.2 0.01 100 1000000 0.8 5 outhdf5 0 > outtxt
+
 ### Using SLURM Batch
 
 To submit a job using SLURM, use the following command:
 
 ```bash
-sbatch --job-name="RunName_1.8_1_0.8_1.0" --output="RunName_1.8_1_0.8_1.0.out" ../irun_slstm_evol.sh ../build/slstm_article RunName 100 1000000 0.8 5 RunName1_1.8_1_0.8 0
+sbatch  --job-name="RunName" --output="RunName.out" ../irun_evonn.sh  ../build/evonn outtxt 1.0 -0.2 1.2 0.01 100  1000000 0.8  5 outhdf5 0
 ```
 
 Modify the SLURM script according to your local partition name:
@@ -115,7 +117,7 @@ $1 $3 $4 $5 $6 $7 $8 $9 ${10} ${11} ${12} ${13} ${14} > $2
 To run:
 
 ```bash
-sbatch --job-name="{jobname}" --output="{jobname}.out" ../irun_slstm_evol.sh ../build/slstm_article {outname} {CC} {CD} {DC} {Wstrength} {N} {Runs} {mu_rate} {Dhid_start} {outnamesave}_{DC}_{M}_{mu_rate} {mix}
+sbatch --job-name="{jobname}" --output="{jobname}.out" ../irun_evonn.sh ../build/evonn {outname} {CC} {CD} {DC} {Wstrength} {N} {Runs} {mu_rate} {Dhid_start} {outnamesave}_{DC}_{M}_{mu_rate} {mix}
 ```
 
 Alternatively, use the `run_survey.py` script from the running directory.
